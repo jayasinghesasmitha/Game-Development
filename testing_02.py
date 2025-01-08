@@ -41,23 +41,25 @@ jump_speed = -15
 player_speed_y = 0
 is_jumping = False
 score = 0
+hearts_collected = 0  # Variable to track collected hearts
 font = pygame.font.Font(None, 36)
 
 paused = False
 game_over = False
+game_won = False  # Variable to track if the player wins
 
 # Function to draw the player as a stick figure
 def draw_player(player_rect):
     pygame.draw.circle(screen, BLUE, (player_rect.centerx, player_rect.top + 15), 10)
-    pygame.draw.line(screen, BLACK, (player_rect.centerx, player_rect.top + 25), 
+    pygame.draw.line(screen, BLACK, (player_rect.centerx, player_rect.top + 25),
                      (player_rect.centerx, player_rect.top + 40), 3)
-    pygame.draw.line(screen, BLACK, (player_rect.centerx, player_rect.top + 30), 
+    pygame.draw.line(screen, BLACK, (player_rect.centerx, player_rect.top + 30),
                      (player_rect.centerx - 10, player_rect.top + 35), 2)
-    pygame.draw.line(screen, BLACK, (player_rect.centerx, player_rect.top + 30), 
+    pygame.draw.line(screen, BLACK, (player_rect.centerx, player_rect.top + 30),
                      (player_rect.centerx + 10, player_rect.top + 35), 2)
-    pygame.draw.line(screen, BLACK, (player_rect.centerx, player_rect.top + 40), 
+    pygame.draw.line(screen, BLACK, (player_rect.centerx, player_rect.top + 40),
                      (player_rect.centerx - 10, player_rect.bottom), 2)
-    pygame.draw.line(screen, BLACK, (player_rect.centerx, player_rect.top + 40), 
+    pygame.draw.line(screen, BLACK, (player_rect.centerx, player_rect.top + 40),
                      (player_rect.centerx + 10, player_rect.bottom), 2)
 
 def draw_obstacles():
@@ -72,6 +74,10 @@ def draw_heart(x, y):
 def draw_hearts():
     for heart in hearts:
         draw_heart(heart.x + heart.width // 2, heart.y + heart.height // 2)
+
+def display_heart_bar(x, y, heart_count):
+    for i in range(heart_count):
+        draw_heart(x + i * 30, y)  # Draw hearts spaced 30 pixels apart
 
 def move_objects():
     global score
@@ -93,11 +99,11 @@ def check_collision():
     return False
 
 def check_heart_collection():
-    global score
+    global hearts_collected
     for heart in hearts[:]:
         if player.colliderect(heart):
             hearts.remove(heart)
-            score += 5
+            hearts_collected += 1  # Increment heart count
 
 # Main game loop
 running = True
@@ -108,21 +114,23 @@ while running:
         if event.type == pygame.QUIT:
             running = False
         if event.type == pygame.KEYDOWN:
-            if event.key == pygame.K_SPACE and not is_jumping and not paused and not game_over:
+            if event.key == pygame.K_SPACE and not is_jumping and not paused and not game_over and not game_won:
                 is_jumping = True
                 player_speed_y = jump_speed
-            if event.key == pygame.K_p and not game_over:
+            if event.key == pygame.K_p and not game_over and not game_won:
                 paused = not paused
-            if event.key == pygame.K_r and game_over:
+            if event.key == pygame.K_r and (game_over or game_won):
                 # Reset game variables for restart
                 game_over = False
+                game_won = False
                 paused = False
                 obstacles.clear()
                 hearts.clear()
                 score = 0
+                hearts_collected = 0
                 player.y = SCREEN_HEIGHT - player_size[1] - 20
 
-    if not paused and not game_over:
+    if not paused and not game_over and not game_won:
         # Player movement
         if is_jumping:
             player_speed_y += GRAVITY
@@ -160,9 +168,16 @@ while running:
             game_over = True
         check_heart_collection()
 
+        # Check win condition
+        if hearts_collected >= 1:
+            game_won = True
+
         # Display score
         score_text = font.render(f"Score: {score}", True, BLACK)
         screen.blit(score_text, (10, 10))
+
+        # Display heart bar
+        display_heart_bar(10, 50, hearts_collected)
 
     elif paused:
         pause_text = font.render("Game Paused. Press P to Resume", True, RED)
@@ -173,6 +188,12 @@ while running:
         screen.blit(game_over_text, (SCREEN_WIDTH // 2 - 150, SCREEN_HEIGHT // 2))
         score_text = font.render(f"Final Score: {score}", True, BLACK)
         screen.blit(score_text, (SCREEN_WIDTH // 2 - 100, SCREEN_HEIGHT // 2 + 50))
+        heart_text = font.render(f"Hearts Collected: {hearts_collected}", True, PINK)
+        screen.blit(heart_text, (SCREEN_WIDTH // 2 - 120, SCREEN_HEIGHT // 2 + 90))
+
+    elif game_won:
+        win_text = font.render("I Love You! Press R to Restart", True, GREEN)
+        screen.blit(win_text, (SCREEN_WIDTH // 2 - 150, SCREEN_HEIGHT // 2))
 
     # Update display
     pygame.display.flip()
