@@ -2,14 +2,18 @@ import sys
 import pygame
 
 from scripts.entities import physicsEntity
-from scripts.utils import load_image
+from scripts.utils import load_image,load_images
+from scripts.tilemap import Tilemap
 
 class Game:
     def __init__(self):
         pygame.init()
 
         pygame.display.set_caption("ninja game")
+
         self.screen = pygame.display.set_mode((640,480))
+
+        self.display = pygame.Surface((320,240))
 
         self.clock = pygame.time.Clock()
 
@@ -23,14 +27,25 @@ class Game:
         self.movement = [False,False]
 
         self.assets= {
+            'decor':load_images('tiles/decor'),
+            'grass':load_images('tiles/grass'),
+            'large_decor':load_images('tiles/large_decor'),
+            'stone':load_images('tiles/stone'),
             'player':load_image('entities/player/player.png')
         }
 
+        #print(self.assets)
         self.player = physicsEntity(self,'player',(50,50),(8,15))
-    
+        self.tilemap = Tilemap(self,tile_size=16)
+
     def run(self):
         while True:
-            self.screen.fill((14,255,144))
+            
+            #for the whole area
+            #self.screen.fill((14,255,144))
+
+            #for the selected area
+            self.display.fill((14,255,144))
             '''
             #if you want to move the object under the rectangular area uncomment below lines.
             #self.img_pos[1] += (self.movement[1]-self.movement[0])*5
@@ -49,8 +64,15 @@ class Game:
             self.screen.blit(self.img, self.img_pos)
             '''
 
+            self.tilemap.render(self.display)
+
             self.player.update((self.movement[1]-self.movement[0],0))
-            self.player.render(self.screen)
+
+            #self.player.render(self.screen)
+            self.player.render(self.display)
+
+            #to check the collision
+            #print(self.tilemap.tiles_around(self.player.pos))
 
             for event in pygame.event.get():
                 if event.type == pygame.QUIT:
@@ -69,6 +91,7 @@ class Game:
                     if event.key == pygame.K_RIGHT:
                         self.movement[1] = False
 
+            self.screen.blit(pygame.transform.scale(self.display,self.screen.get_size()),(0,0))
             pygame.display.update()
             self.clock.tick(60)
 
