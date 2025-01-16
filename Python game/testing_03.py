@@ -32,8 +32,8 @@ class Game:
             'grass':load_images('tiles/grass'),
             'large_decor':load_images('tiles/large_decor'),
             'stone':load_images('tiles/stone'),
-            'player':load_image('entities/player/player.png'),
-            'background': load_image('backgrounds/background.png'),
+            'player':load_image('entities/player.png'),
+            'background': load_image('background.png'),
             'clouds':load_images('clouds'),
             'player/idle' : Animation(load_images('entities/player/idle'),img_dur= 6),
             'player/run' : Animation(load_images('entities/player/run'),img_dur = 4),
@@ -46,6 +46,8 @@ class Game:
         self.clouds = Clouds(self.assets['clouds'],count=16)
         self.player = Player(self,(50,50),(8,15))
         self.tilemap = Tilemap(self,tile_size=16)
+
+        self.tilemap.load('map.json')
         self.scroll = [0,0]
 
     def run(self):
