@@ -24,7 +24,7 @@ class Editor:
             'large_decor':load_images('tiles/large_decor'),
             'stone':load_images('tiles/stone'),
             'spawners' : load_images('tiles/spawners'),
-            'element':load_images('tiles/elements'),
+            'element': load_images('tiles/element')
         }
         
         #print(self.assets)
