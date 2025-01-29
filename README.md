@@ -66,12 +66,6 @@ I'm thrilled to share a project I've been working on: a Ninja Game, coded entire
 └── ...
 ```
 
-## Contributing
-Contributions are welcome! Feel free to open issues or submit pull requests.
-
-## License
-This project is licensed under the MIT License.
-
 ## Contact
 - **Author:** Jayasinghe Sasmitha
 - **Email:** sasmithajayasinghe2002@gmail.com
