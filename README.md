@@ -1,71 +1,69 @@
-# AI Photo Generator
+# Ninja Game
 
 ## Description
-This project is an AI-powered photo generator that utilizes OpenAI's API to create images based on user prompts. The backend is built with Node.js, and the frontend is styled with HTML and CSS to provide a user-friendly experience.
+🚀 My Python-Coded Ninja Game! 🥷🎮
+
+I'm thrilled to share a project I've been working on: a Ninja Game, coded entirely in Python! This game brings together my passion for coding and gaming, blending creativity with logic to deliver an exciting experience.
 
 ## Features
-- Generate AI-powered photos from text prompts
-- Simple and clean user interface
-- Responsive design
-- Option to save and share generated photos
+- **Dynamic Gameplay:** Action-packed challenges to keep players engaged.
+- **Smooth Animations:** Designed with precision for a seamless experience.
+- **Custom Mechanics:** Unique ninja moves and abilities crafted with Python magic.
 
-## Technologies Used
-- **Backend:** Node.js, Express
-- **Frontend:** HTML, CSS
-- **API:** OpenAI API
+## Tech Stack
+- **Python** (with libraries like Pygame for graphics and game mechanics)
 
 ## Installation
 
 ### Prerequisites
-- Node.js installed
-- OpenAI API key
+- Python 3.6 or higher
+- Pygame library
 
 ### Steps
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/jayasinghesasmitha/Game-Development.git
+   git clone https://github.com/jayasinghesasmitha/GameDevelopment.git
    cd Game-Development
    ```
 
-2. **Install dependencies:**
+2. **Create a virtual environment:**
    ```bash
-   npm install
+   python -m venv venv
+   source venv/bin/activate  # On Windows, use `venv\Scripts\activate`
    ```
 
-3. **Set up environment variables:**
-   - Create a `.env` file in the root directory.
-   - Add your OpenAI API key:
-     ```plaintext
-     OPENAI_API_KEY=your-api-key-here
-     ```
-
-4. **Start the application:**
+3. **Install dependencies:**
    ```bash
-   node server.js
+   pip install -r requirements.txt
+   ```
+
+4. **Run the game:**
+   ```bash
+   python main.py
    ```
 
 ## Usage
-1. Open `index.html` in a browser.
-2. Enter a text prompt and click the "Generate" button.
-3. View and save the generated photo.
+1. Launch the game by running `main.py`.
+2. Enjoy the dynamic gameplay and smooth animations.
+3. Use the unique ninja moves and abilities to overcome challenges.
 
 ## Project Structure
 
 ```plaintext
-├── public
-│   ├── css
-│   │   └── styles.css
-│   ├── js
-│   │   └── script.js
-│   └── index.html
+├── assets
+│   ├── images
+│   │   └── ...
+│   ├── sounds
+│   │   └── ...
 ├── src
-│   ├── app.js
-│   ├── routes.js
+│   ├── main.py
+│   ├── game.py
+│   ├── player.py
 │   └── ...
-├── .env
-├── package.json
-└── README.md
+├── README.md
+├── requirements.txt
+└── ...
 ```
 
 ## Contributing
@@ -77,4 +75,4 @@ This project is licensed under the MIT License.
 ## Contact
 - **Author:** Jayasinghe Sasmitha
 - **Email:** sasmithajayasinghe2002@gmail.com
-- **GitHub:** [jayasinghesasmitha](https://github.com/jayasinghesasmitha)
+- **GitHub:** jayasinghesasmitha
