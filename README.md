@@ -24,8 +24,8 @@ This project is an AI-powered photo generator that utilizes OpenAI's API to crea
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/jayasinghesasmitha/AI-Photo-generator.git
-   cd AI-Photo-generator
+   git clone https://github.com/jayasinghesasmitha/Game-Development.git
+   cd Game-Development
    ```
 
 2. **Install dependencies:**
