@@ -23,7 +23,7 @@ I'm thrilled to share a project I've been working on: a Ninja Game, coded entire
 
 1. **Clone the repository:**
    ```bash
-   git clone https://github.com/jayasinghesasmitha/GameDevelopment.git
+   git clone https://github.com/jayasinghesasmitha/Game-Development.git
    cd Game-Development
    ```
 
